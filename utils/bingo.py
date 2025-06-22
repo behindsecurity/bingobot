@@ -13,7 +13,9 @@ def generate_table(user_id: str, current_card: list):
     bingo_numbers = sorted(current_card)
 
     # Positions to place the bingo numbers on the card
-    positions = [(i, j) for i in range(5) for j in range(5) if not (i == 2 and j == 2)]  # Skip the center position
+    positions = [
+        (i, j) for i in range(5) for j in range(5) if not (i == 2 and j == 2)
+    ]  # Skip the center position
 
     # Define font and size
     font_path = "fonts/LEMONMILK-Bold.otf"
@@ -50,7 +52,7 @@ def end_game(host_player: str):
     json_util.save_game_data(game_data)
 
 
-def check_winner(game_data:dict, host_player: str):
+def check_winner(game_data: dict, host_player: str):
     drawn_numbers = set(game_data[host_player]["numbers_drawn"])
     # Lord please forgive me
     for player_id, player_data in game_data[host_player].items():
