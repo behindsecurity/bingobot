@@ -29,25 +29,25 @@ A Bingo game bot for Discord, built with discord.py and asyncio. Host, join, and
 
 1. **Clone the repository**
 
-   ```bash
-   git clone https://github.com/behindsecurity/bingobot.git
-   cd bingobot
-   ```
+```bash
+git clone https://github.com/behindsecurity/bingobot.git
+cd bingobot
+```
 
 2. **Install dependencies**
 
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
-   pip install -r requirements.txt
-   ```
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
 
 3. **Configure the bot**
 
    * Move `utils/config.example.py` to `utils/config.py`.
    * Fill in your bot token and IDs at `utils/config.py`:
 
-     ```python
+```python
 TOKEN = "YOUR_BOT_TOKEN"  # Discord bot token
 GAME_DATA_PATH = "./bingo_game_data.json"  # Path to a json file that will host the bingo data, e.g. ./bingo_game_data.json
 BINGO_ADMIN_ROLE_ID = 1  # Role allowed to host (ROLE ID, INTEGER)
@@ -56,7 +56,7 @@ OWNER_ID = 1  # Developer for error alerts (USER ID, INTEGER)
 BUTTON_COOLDOWN = 5  # Seconds between button presses
 DRAW_INTERVAL = 10  # Seconds between number draws
 BINGO_THUMBNAIL_URL = ""  # Embed thumbnail image
-     ```
+```
 
 ---
 
