@@ -1,6 +1,6 @@
 bingo_game_data.json
 utils/__pycache__
+utils/config.py
 images/cards
 nohup.out
-.env
 .venv
