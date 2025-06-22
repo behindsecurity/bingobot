@@ -2,7 +2,6 @@
 
 A Bingo game bot for Discord, built with discord.py and asyncio. Host, join, and play Bingo with friends—complete with dynamic bingo boards, real-time number draws, and a global leaderboard.
 
----
 
 ## Features
 
@@ -15,7 +14,6 @@ A Bingo game bot for Discord, built with discord.py and asyncio. Host, join, and
 * **Leaderboard**: Tracks lifetime wins in a persistent JSON file and displays the top winners with `/leaderboard`.
 * **Cooldowns & Concurrency**: Button clicks are rate‑limited per user, and file accesses are synchronized to prevent race conditions.
 
----
 
 ## Prerequisites
 
@@ -23,7 +21,6 @@ A Bingo game bot for Discord, built with discord.py and asyncio. Host, join, and
 * A Discord bot token
 * The `discord.py` library (v2.x)
 
----
 
 ## Installation
 
@@ -58,7 +55,6 @@ DRAW_INTERVAL = 10  # Seconds between number draws
 BINGO_THUMBNAIL_URL = ""  # Embed thumbnail image
 ```
 
----
 
 ## Usage
 
@@ -78,7 +74,6 @@ Once a game is created, players will see buttons:
 * **Claim Bingo** (`🎉`) — During a game: claim your bingo.
 * **My Card** (`🃏`) — Receive your bingo card.
 
----
 
 ## File Structure
 
@@ -97,7 +92,6 @@ Once a game is created, players will see buttons:
 └── README.md             # This file
 ```
 
----
 
 ## Contributing
 
@@ -107,7 +101,6 @@ Once a game is created, players will see buttons:
 4. Push to your fork: `git push origin feature/my-feature`
 5. Open a pull request.
 
----
 
 ## License
 
