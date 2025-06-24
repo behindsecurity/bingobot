@@ -1,7 +1,4 @@
 import random
-import numpy as np
-import matplotlib.pyplot as plt
-from PIL import Image, ImageDraw, ImageFont
 
 
 def generate_bingo_card():

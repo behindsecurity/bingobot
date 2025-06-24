@@ -1,11 +1,10 @@
 import discord
-from discord.ext import commands
-from discord import app_commands
-import random
 import asyncio
-import os
-import glob
+import random
 import time
+
+from discord import app_commands
+from discord.ext import commands
 from datetime import datetime
 
 from utils import config, json_util, bingo
@@ -74,8 +73,10 @@ class CardView(discord.ui.View):
         self.marks = set(game[player_id].get("marks", []))
 
         # Build a 5×5 grid mapping (row,col) → number (skip center)
-        grid: list[list[int | None]] = [[None]*5 for _ in range(5)]
-        positions = [(r, c) for r in range(5) for c in range(5) if not (r==2 and c==2)]
+        grid: list[list[int | None]] = [[None] * 5 for _ in range(5)]
+        positions = [
+            (r, c) for r in range(5) for c in range(5) if not (r == 2 and c == 2)
+        ]
         for (r, c), num in zip(positions, card_numbers):
             grid[r][c] = num
 
@@ -95,8 +96,11 @@ class CardView(discord.ui.View):
                     marked = num in self.marks
                     btn = discord.ui.Button(
                         label=str(num),
-                        style=discord.ButtonStyle.success
-                             if marked else discord.ButtonStyle.secondary,
+                        style=(
+                            discord.ButtonStyle.success
+                            if marked
+                            else discord.ButtonStyle.secondary
+                        ),
                         custom_id=f"bingo_card:{host_id}:{player_id}:{num}",
                         row=r,
                     )
@@ -240,11 +244,6 @@ class BingoView(discord.ui.View):
             await self.message.delete()
         except:
             pass
-        for img in glob.glob("images/cards/*.png"):
-            try:
-                os.remove(img)
-            except:
-                pass
         for child in self.children:
             child.disabled = True
         try:
@@ -412,12 +411,19 @@ class HostView(discord.ui.View):
                 f"Slow down! Try again in {retry:.1f}s.", ephemeral=True
             )
         host_id = str(interaction.user.id)
+
         async with game_data_lock:
             data = json_util.load_game_data()
+            if not data.get(host_id):
+                await interaction.response.send_message(
+                    "You aren't hosting a game.", ephemeral=True
+                )
+                return
             data.pop(host_id, None)
             json_util.save_game_data(data)
+
         await interaction.response.send_message(
-            "Game has been cancelled.", ephemeral=False
+            f"Game by <@{host_id}>has been cancelled.", ephemeral=False
         )
         await interaction.message.delete()
 
@@ -453,11 +459,6 @@ bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 async def on_ready():
     async with game_data_lock:
         json_util.save_game_data({})
-    for file in glob.glob("images/cards/*.png"):
-        try:
-            os.remove(file)
-        except:
-            pass
     await bot.tree.sync()
     print(f"Logged in as {bot.user}")
 
